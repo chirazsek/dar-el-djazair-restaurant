@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dar El Djazair Kitchen · Batna</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="logo"><i data-lucide="chef-hat"></i></span><span class="name">Dar El Djazair Kitchen</span></div>
+  <span class="pill"><i class="dot"></i>Open Today · Batna City</span>
+  <a class="admin" href="./admin.html">Admin</a>
+  <button class="tray-btn" id="openTray" aria-label="Open order tray"><i data-lucide="shopping-bag"></i><span>Order Tray</span><b id="badge">0</b></button>
+</header>
+
+<main>
+  <section class="track">
+    <form id="trackForm">
+      <label for="trackCode">Track my order</label>
+      <input id="trackCode" placeholder="ORD-4821" autocomplete="off" maxlength="12">
+      <button class="btn ghost" type="submit">Check status</button>
+    </form>
+    <div id="trackResult" aria-live="polite"></div>
+  </section>
+
+  <nav class="filters" id="filters" aria-label="Menu categories"></nav>
+  <section class="grid" id="menu" aria-live="polite"></section>
+</main>
+
+<div class="scrim" id="scrim"></div>
+<aside class="tray" id="tray" aria-label="Order tray">
+  <div class="tray-head"><h2>Your order</h2><button class="icon-btn" id="closeTray" aria-label="Close tray"><i data-lucide="x"></i></button></div>
+  <div class="tray-body">
+    <ul id="items" class="items"></ul>
+    <form id="orderForm" novalidate>
+      <div class="sum">
+        <div><span>Subtotal</span><b id="sub">0 DA</b></div>
+        <div id="feeRow" hidden><span>Local delivery</span><b>200 DA</b></div>
+        <div class="total"><span>Total</span><b id="total">0 DA</b></div>
+      </div>
+      <label>Full name<input name="name" required autocomplete="name"></label>
+      <label>Mobile phone<input name="phone" inputmode="tel" placeholder="0550 12 34 56" autocomplete="tel" required><small class="err" data-err="phone"></small></label>
+      <fieldset class="types">
+        <legend>Order type</legend>
+        <label><input type="radio" name="type" value="dinein" checked><span>Dine-in</span></label>
+        <label><input type="radio" name="type" value="takeaway"><span>Takeaway</span></label>
+        <label><input type="radio" name="type" value="delivery"><span>Delivery</span></label>
+      </fieldset>
+      <label data-for="dinein">Table number<input name="table" type="number" min="1" max="60" placeholder="4"></label>
+      <label data-for="takeaway" hidden>Pickup preference
+        <select name="pickup"><option value="ASAP">ASAP</option><option value="In 20 min">In 20 min</option></select></label>
+      <label data-for="delivery" hidden>Neighborhood / street in Batna
+        <input name="address" list="hoods" placeholder="Kechida, rue 12…"></label>
+      <datalist id="hoods"><option value="Kechida"><option value="Centre-Ville"><option value="Cité 1200 Logements"><option value="Bouzourane"><option value="Cité Chikhi"><option value="Parc à Fourrage"></datalist>
+      <label>Notes (optional)<textarea name="notes" rows="2" placeholder="No onions, extra harissa…"></textarea></label>
+      <small class="err" id="formErr"></small>
+      <button class="btn" type="submit" id="submitBtn">Place order</button>
+    </form>
+  </div>
+</aside>
+
+<div class="modal" id="ticketModal" hidden>
+  <div class="ticket" role="dialog" aria-modal="true" aria-labelledby="tkTitle">
+    <p id="tkTitle" class="tk-title">Order received</p>
+    <div class="code" id="tkCode"></div>
+    <p class="hint">Keep this code to track your order.</p>
+    <ul id="tkItems" class="tk-items"></ul>
+    <div class="tk-meta" id="tkMeta"></div>
+    <div class="sum"><div class="total"><span>Total</span><b id="tkTotal"></b></div></div>
+    <button class="btn" id="tkClose">Done</button>
+  </div>
+</div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="app.js"></script>
+</body>
+</html>
